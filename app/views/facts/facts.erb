@@ -1,0 +1,6 @@
+All Facts
+<% Fact.all.each do |f| %>
+  <ul>
+    <%= f.content %> - <% f.username %>
+  </ul>
+<% end %>

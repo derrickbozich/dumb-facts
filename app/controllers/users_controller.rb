@@ -1,4 +1,4 @@
-class UsersController < Sinatra::Base
+class UsersController < ApplicationController
   get '/login' do
     erb :'users/login'
   end
@@ -33,7 +33,7 @@ class UsersController < Sinatra::Base
       redirect "/signup"
     else
       @user = User.create(params)
-      session[:user_id] = @user.id 
+      session[:user_id] = @user.id
       redirect '/facts'
     end
   end
