@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   get '/login' do
     if logged_in?
-      binding.pry
+
       redirect '/facts'
     else
-      binding.pry
+
       erb :'users/login'
     end
 
@@ -23,11 +23,11 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    binding.pry
+
     if logged_in?
 
       session.clear
-        binding.pry
+      
       redirect '/login'
 
     else

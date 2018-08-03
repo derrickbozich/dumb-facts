@@ -6,8 +6,8 @@ class FactsController < ApplicationController
 
   get '/:username/facts/:id' do
     @user = User.find_by_slug(params['username'])
-    fact = (params['id'].to_i)-1
-    @fact = @user.facts[fact]
+    @fact = @user.facts[params['id'].to_i-1]
+
     erb :'facts/show'
   end
 
@@ -15,8 +15,7 @@ class FactsController < ApplicationController
 
   get '/:username/facts/:id/edit' do
     @user = User.find_by(:username => params['username'])
-    @fact_number = (params['id'].to_i)-1
-    @fact = @user.facts[@fact_number]
+    @fact = @user.facts[params['id'].to_i-1]
     if logged_in?
       erb :'facts/edit'
     else
@@ -26,8 +25,7 @@ class FactsController < ApplicationController
 
   post '/:username/facts/:id' do
     @user = User.find_by_slug(params['username'])
-    @fact_number = (params['id'].to_i)-1
-    @fact = @user.facts[@fact_number]
+    @fact = @user.facts[params['id'].to_i]
 
     if params['content'] == ""
       redirect "/#{params['username']}/facts/#{params['id']}/edit"
@@ -46,7 +44,7 @@ class FactsController < ApplicationController
 
   get '/facts/new' do
     if logged_in?
-      binding.pry
+
       erb :'facts/new'
     else
       redirect '/login'
@@ -66,8 +64,7 @@ class FactsController < ApplicationController
 
   post '/:username/facts/:id/delete' do
     @user = User.find_by_slug(params['username'])
-    fact = (params['id'].to_i)-1
-    @fact = @user.facts[fact]
+    @fact = @user.facts[params['id']]
 
     @fact.delete
     redirect '/facts'
