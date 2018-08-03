@@ -36,6 +36,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect '/facts'
     end
+
   end
 
 
