@@ -16,7 +16,8 @@ class FactsController < ApplicationController
   get '/:username/facts/:id/edit' do
     @user = User.find_by(:username => params['username'])
     @fact = @user.facts[params['id'].to_i-1]
-    if logged_in?
+
+    if @user == current_user
       erb :'facts/edit'
     else
       redirect '/login'
@@ -25,7 +26,7 @@ class FactsController < ApplicationController
 
   post '/:username/facts/:id' do
     @user = User.find_by_slug(params['username'])
-    @fact = @user.facts[params['id'].to_i]
+    @fact = @user.facts[params['id'].to_i-1]
 
     if params['content'] == ""
       redirect "/#{params['username']}/facts/#{params['id']}/edit"
