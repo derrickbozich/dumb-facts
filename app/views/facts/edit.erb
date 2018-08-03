@@ -1,9 +1,9 @@
-figure out why shotgun doesnt know why i changed username
-<form action="/<%= @user.slug %>/facts/<%= @fact_number %>" method="POST">
+figure out why shotgun doesnt know that i changed username
+<form action="/<%= @user.slug %>/facts/<%= @fact_number + 1 %>" method="POST">
   <input type="text" name="content" value="<%= @fact.content %>">
   <input type="submit" value="Edit fact">
 </form>
 
-<form action="/<%= @user.username.slug %>/facts/<%= @fact_number %>" method="POST">
+<form action="/<%= @user.slug %>/facts/<%= @fact_number + 1%>" method="POST">
   <input type="submit" value="Delete Fact">
 </form>

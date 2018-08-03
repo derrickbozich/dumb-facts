@@ -15,8 +15,8 @@ class FactsController < ApplicationController
 
   get '/:username/facts/:id/edit' do
     @user = User.find_by(:username => params['username'])
-    fact = (params['id'].to_i)-1
-    @fact = @user.facts[fact]
+    @fact_number = (params['id'].to_i)-1
+    @fact = @user.facts[@fact_number]
     if logged_in?
       erb :'facts/edit'
     else
@@ -46,6 +46,7 @@ class FactsController < ApplicationController
 
   get '/facts/new' do
     if logged_in?
+      binding.pry
       erb :'facts/new'
     else
       redirect '/login'
