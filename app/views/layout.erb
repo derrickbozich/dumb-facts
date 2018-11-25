@@ -17,7 +17,7 @@
       </li>
       <li class="nav-item active">
         <% if current_user %>
-          <div class="nav-link" href="#">Current User: <%= current_user.username %></div>
+          <div class="nav-link" href="#">Current User: <a href="/<%= current_user.username %>/facts"><%= current_user.username %></a></div>
         <% end %>
       </li>
     </ul>
@@ -38,6 +38,7 @@
   </div>
 </nav>
 <div class="container-fluid">
+  
   <%= yield %>
 </div>
 

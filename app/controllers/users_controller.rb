@@ -11,10 +11,12 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params['username'])
     if @user && @user.authenticate(params['password'])
       session[:user_id] = @user.id
+      redirect '/facts'
     else
-      redirect '/login'
+      @error = 'incorrect username or password'
+      erb :'users/login'
     end
-    redirect '/facts'
+
   end
 
   get '/logout' do
@@ -33,8 +35,12 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params['username'] == "" || params['email'] == "" || params['password'] == ""
-      redirect "/signup"
+    if (params['username'] == "" || params['email'] == "" || params['password'] == "" )
+      @error = "Please fill out all fields"
+      erb :'users/create_user'
+    elsif User.find_by(email: params['email'])
+      @error = "User emails must be unique"
+      erb :'users/create_user'
     else
       @user = User.create(params)
       session[:user_id] = @user.id

@@ -12,6 +12,15 @@ class FactsController < ApplicationController
     erb :'facts/show'
   end
 
+  get '/facts/:id' do
+    @fact = Fact.find_by_id(params['id'])
+    @user = User.find_by_id(@fact.user_id)
+
+    erb :'facts/show'
+  end
+
+
+
 
 
   get '/:username/facts/:id/edit' do

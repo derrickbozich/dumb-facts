@@ -1,4 +1,8 @@
 <h1>Sign Up</h1>
+<% if @error %>
+  <h6><%= @error  %></h6>
+<% end %>
+
 <form action="/signup" method="POST">
   <p>USERNAME<input type="text" name="username"></p>
   <p>EMAIL<input type="text" name="email"></p>

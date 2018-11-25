@@ -1,4 +1,4 @@
-<h1>All Facts</h1>
+<h2>All Facts</h2>
 <% username = current_user.username  %>
 <% facts = current_user.facts %>
 
@@ -6,7 +6,7 @@
 <% edit_path = "/#{username}/facts/#{f.id}/edit" %>
   <ul>
     <li>
-      <%= f.content %>
+      <a href="/facts/<%= f.id %>"><%= f.content %></a>
       <% if facts.find_by_id(f.id) %>
         <form action=<%= edit_path %>>
           <input type="submit" value="Edit" />
