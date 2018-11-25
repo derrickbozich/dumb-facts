@@ -1,14 +1,10 @@
 class UsersController < ApplicationController
   get '/login' do
     if logged_in?
-
       redirect '/facts'
     else
-
       erb :'users/login'
     end
-
-
   end
 
   post '/login' do
@@ -16,22 +12,17 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params['password'])
       session[:user_id] = @user.id
     else
-
       redirect '/login'
     end
     redirect '/facts'
   end
 
   get '/logout' do
-
     if logged_in?
-
       session.clear
-      
       redirect '/login'
-
     else
-      redirect '/login'
+      redirect '/facts'
     end
   end
 
