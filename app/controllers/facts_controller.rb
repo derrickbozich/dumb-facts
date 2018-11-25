@@ -1,7 +1,17 @@
 class FactsController < ApplicationController
   get '/:username/facts' do
     @user = User.find_by_slug(params['username'])
-    erb :'facts/user_facts'
+    @facts = @user.facts
+    erb :'facts/facts'
+  end
+
+  get '/facts/new' do
+    if logged_in?
+      erb :'facts/new'
+    else
+      @error = 'You must be logged in to create a fact'
+      erb :'users/login'
+    end
   end
 
   get '/:username/facts/:id' do
@@ -18,10 +28,6 @@ class FactsController < ApplicationController
 
     erb :'facts/show'
   end
-
-
-
-
 
   get '/:username/facts/:id/edit' do
 
@@ -51,20 +57,12 @@ class FactsController < ApplicationController
     end
   end
 
-
-
   get '/facts' do
+    @facts = Fact.all
     erb :'facts/facts'
   end
 
-  get '/facts/new' do
-    if logged_in?
-      erb :'facts/new'
-    else
-      redirect '/login'
-    end
 
-  end
 
   post '/facts' do
     if params['content'] != ''
@@ -72,7 +70,8 @@ class FactsController < ApplicationController
       @fact = Fact.create(content: params['content'], user_id: @user.id)
       redirect '/facts'
     else
-      redirect '/facts/new'
+      @error = 'Your fact cannot be blank'
+      erb :'facts/new'
     end
   end
 

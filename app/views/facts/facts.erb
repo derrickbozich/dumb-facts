@@ -1,17 +1,18 @@
-<h2>All Facts</h2>
-<% username = current_user.username  %>
-<% facts = current_user.facts %>
+<% if current_user %>
+  <% username = current_user.username  %>
+  <% facts = current_user.facts %>
+<% else %>
+  <% username = ''  %>
+<% end %>
 
-<% Fact.all.each do |f| %>
+<% @facts.each do |f| %>
 <% edit_path = "/#{username}/facts/#{f.id}/edit" %>
-  <ul>
-    <li>
-      <a href="/facts/<%= f.id %>"><%= f.content %></a>
-      <% if facts.find_by_id(f.id) %>
-        <form action=<%= edit_path %>>
-          <input type="submit" value="Edit" />
-        </form>
-      <% end %>
-    </li>
-  </ul>
+  <a style="color:black;" href="/facts/<%= f.id %>"><h4><%= f.content %></h4></a><br>
+  <% if facts %>
+    <% if facts.find_by_id(f.id) %>
+      <form action=<%= edit_path %>>
+        <input type="submit" value="Edit" />
+      </form>
+    <% end %>
+  <% end %>
 <% end %>
