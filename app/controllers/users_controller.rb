@@ -28,8 +28,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DO I NEED A POST AND ERB FOR LOGOUT?
-
   get '/signup' do
     erb :'users/create_user'
   end
@@ -48,8 +46,4 @@ class UsersController < ApplicationController
     end
 
   end
-
-
-
-
 end

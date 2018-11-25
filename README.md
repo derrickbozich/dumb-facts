@@ -1,7 +1,7 @@
-# dumb-facts
+# random-facts
 
 
- Dumb Facts is a site where users can share dumb facts
+ Random Facts is a site where users can share random facts
 
  To install: clone this repository, run bundle install, migrate the tables and use rack to view the content in your browser
 

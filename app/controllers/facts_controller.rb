@@ -62,8 +62,6 @@ class FactsController < ApplicationController
     erb :'facts/facts'
   end
 
-
-
   post '/facts' do
     if params['content'] != ''
       @user = User.find_by_id(session['user_id'])
@@ -82,6 +80,5 @@ class FactsController < ApplicationController
     @fact.destroy
     redirect '/facts'
   end
-
 
 end
